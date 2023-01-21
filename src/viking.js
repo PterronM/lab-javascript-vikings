@@ -78,10 +78,11 @@ class War {
 
     }
     vikingAttack = () => {
-        this.Saxon.receiveDamage(this.Viking.health)
+        
         if(this.Saxon.health === 0){
-            this.saxonArmy.shift();
+            this.saxonArmy.shift(saxon);
         }
+        return this.Saxon.receiveDamage(this.Viking.strength);
     }
     saxonAttack = () => {
 
