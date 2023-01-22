@@ -34,10 +34,10 @@ class Viking extends Soldier {
 
         this.health -= damage
 
-        if(this.health !== 0){
-            return `${this.name} has received ${damage} points of damage`
-        }else{
+        if(this.health <= 0){
             return `${this.name} has died in act of combat`
+        }else{
+            return `${this.name} has received ${damage} points of damage`
         }
 
     }
@@ -52,10 +52,10 @@ class Saxon extends Soldier {
     receiveDamage = (damage) =>{
         this.health -= damage
 
-        if(this.health !== 0){
-            return `A Saxon has received ${damage} points of damage`
+        if(this.health <= 0){
+            return  `A Saxon has died in combat`
         }else{
-            return `A Saxon has died in combat`
+            return `A Saxon has received ${damage} points of damage`
         }
     }
 }
@@ -69,20 +69,29 @@ class War {
 
     addViking = (viking) => {
         
-        this.vikingArmy += viking;       
-               
+        this.vikingArmy.push(viking);//siempre me muestra el mismo vikingo
+           
     } 
     addSaxon = (saxon) => {
         
-        this.saxonArmy += saxon;  
-
+        this.saxonArmy.push(saxon);  
+        
     }
     vikingAttack = () => {
-        
-        if(this.Saxon.health === 0){
-            this.saxonArmy.shift(saxon);
+
+        let vikingRandomInt = this.vikingArmy[Math.floor(Math.random()*this.vikingArmy.length)]
+        console.log(vikingRandomInt)
+
+        let saxonRandomInt = this.saxonArmy[Math.floor(Math.random()*this.saxonArmy.length)]
+        console.log(saxonRandomInt)
+     
+        if(this.saxonArmy[saxonRandomInt].health<=0){
+            this.saxonArmy.shift(this.saxonArmy[saxonRandomInt])
         }
-        return this.Saxon.receiveDamage(this.Viking.strength);
+        // else{
+        //     return this.saxonArmy[saxonRandomInt].receiveDamage(this.vikingArmy[vikingRandomInt].strength)
+        // }
+        
     }
     saxonAttack = () => {
 
@@ -92,5 +101,5 @@ class War {
     }
 }
 
-// console.log(War.addViking)
+
 
